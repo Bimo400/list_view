@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:list_view/TabbarExample.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: MyApp(),
+    home: TabbarExample(),
   ));
 }
 
@@ -33,17 +34,36 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("List Siswa Kelas 11 PPLG 1"),
-          backgroundColor: Color.fromARGB(255, 7, 130, 77),
-        ),
         body: ListView.builder(
             padding: EdgeInsets.only(bottom: 20),
             itemCount: users.length,
             itemBuilder: (BuildContext context, int index) {
               final User list = users[index];
               return InkWell(
-                onTap: () {},
+                onLongPress: () {
+                  showDialog <String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Hapus Item'),
+                      content: const Text('Tekan Ok Untuk Menghapus'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, 'Ok');
+                            setState(() {
+                              users.remove(list);
+                            });
+                          },
+                          child: const Text('Ok'),
+                        )
+                      ],
+                    )
+                  );
+                },
                 child: ListTile(
                   leading: CircleAvatar(
                       backgroundImage: AssetImage(users[index].img)),
