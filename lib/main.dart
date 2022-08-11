@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
                       title: const Text('Hapus Item'),
-                      content: const Text('Tekan Ok Untuk Menghapus'),
+                      content: const Text('Tekan OK Untuk Menghapus'),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -53,12 +53,12 @@ class _MyAppState extends State<MyApp> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pop(context, 'Ok');
+                            Navigator.pop(context, 'OK');
                             setState(() {
                               users.remove(list);
                             });
                           },
-                          child: const Text('Ok'),
+                          child: const Text('OK'),
                         )
                       ],
                     )
